@@ -1,21 +1,21 @@
 import Character from '../character';
-import Bowman from '../bowman';
+import Magician from '../magician';
 
 
 // --- constructor ---//
 
 test('constructor throws if name not string', () => {
-  expect(() => new Character(123, 'Bowman'))
+  expect(() => new Character(123, 'Magician'))
     .toThrow('name not string');
 });
 
 test('constructor throws if name shorter 2', () => {
-  expect(() => new Character('a', 'Bowman'))
+  expect(() => new Character('a', 'Magician'))
     .toThrow('name.length < 2');
 });
 
 test('constructor throws if name longer 10', () => {
-  expect(() => new Character('asdfgasdfgasdfg', 'Bowman'))
+  expect(() => new Character('asdfgasdfgasdfg', 'Magician'))
     .toThrow('name.length > 10');
 });
 
@@ -33,31 +33,31 @@ test('constructor throws if type unknown', () => {
 // --- levelUp ---//
 
 test('levelUp rises level', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   man.levelUp();
   expect(man.level).toBe(2);
 });
 
 test('levelUp rises attack', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   man.levelUp();
-  expect(man.attack).toBe(30);
+  expect(man.attack).toBe(12);
 });
 
 test('levelUp rises defense', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   man.levelUp();
-  expect(man.defense).toBe(30);
+  expect(man.defense).toBe(48);
 });
 
 test('levelUp resets health', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   man.levelUp();
   expect(man.health).toBe(100);
 });
 
 test('levelUp dont work if health 0', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   man.health = 0;
   expect(() => man.levelUp())
     .toThrow('Character is already dead');
@@ -67,25 +67,25 @@ test('levelUp dont work if health 0', () => {
 // --- damage ---//
 
 test('damage reduces health', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   man.damage(1);
   expect(man.health).toBe(99);
 });
 
 test('damage throws if points not number', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   expect(() => man.damage('qwe'))
     .toThrow('points are not a number');
 });
 
 test('damage throws if points negative', () => {
-  const man = new Bowman('asd');
+  const man = new Magician('asd');
   expect(() => man.damage(-123))
     .toThrow('negative points value');
 });
 
-test('damage health does not become negative', () => {
-  const man = new Bowman('asd');
+test('damage health Magician not become negative', () => {
+  const man = new Magician('asd');
   man.damage(100500);
   expect(man.health).toBe(0);
 });
