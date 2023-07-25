@@ -5,8 +5,7 @@ export default class MagicCharacter extends Character {
     super(name, type);
     this.attack = 10;
     this.defense = 40;
-    this.damageFunc = (attack, distance) => Math.max(attack * (1 - distance * 0.1), 0);
-    this.isStoned = false;
+    this.setStoned(false);
   }
 
   getStoned() {
