@@ -17,16 +17,24 @@ export default class MagicCharacter extends Character {
       throw new Error('Illegal argument');
     }
     this.isStoned = isStoned;
-    this.damageFunc = isStoned
-      ? (attack, distance) => Math.min(Math.max(attack - Math.log2(distance) * 5, 0), attack)
-      : (attack, distance) => Math.max(attack * (1 - distance * 0.1), 0);
   }
 
-  getAttack(distance) {
-    if (distance == null || !Number.isInteger(distance) || distance < 0) {
-      throw new Error('Illegal argument');
+  getAttack() {
+    const damageFunc = (attack, distance) => (this.isStoned
+      ? Math.min(Math.max(attack - Math.log2(distance) * 5, 0), attack)
+      : Math.max(attack * (1 - distance * 0.1), 0));
+    const attackArray = []; // some hardcode
+    attackArray[0] = this.attack;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i < 100; i++) { // some hardcode
+      const damage = damageFunc(this.attack, i);
+      if (damage > 0) {
+        attackArray.push(damage);
+      } else {
+        break;
+      }
     }
-    return this.damageFunc(this.attack, distance);
+    return attackArray;
   }
 
   setAttack(attack) {
